@@ -1,13 +1,21 @@
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
+
+const { MongoClient } = require("mongodb");
+const { batchImport } = require("./batchImport");
+const { addNewUser } = require("./handlers");
+
+require("dotenv").config();
+const { MONGO_URI } = process.env;
+
 const app = express();
 const PORT = 8000;
 
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("tiny"));
-
+// endpoints
 app.get("/hello", (req, res) => {
   res.status(200).json({
     status: 200,
@@ -15,6 +23,11 @@ app.get("/hello", (req, res) => {
   });
 });
 
+app.post("/api/login/:user", addNewUser);
+app.post("/batch-import-data", batchImport);
+
+// handle 404
+app.use((req, res) => res.status(404).type("txt").send("🤷‍♂️"));
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
