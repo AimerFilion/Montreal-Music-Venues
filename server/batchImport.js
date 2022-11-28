@@ -1,4 +1,3 @@
-const { json } = require("express");
 const { MongoClient } = require("mongodb");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -8,18 +7,21 @@ const options = {
   useUnifiedTopology: true,
 };
 
-const login = require("./data");
+const casaData = require("./data/VenueCasaDelPopolo.json");
 
-const batchImport = async () => {
+const batchImport = async (req, res) => {
+  console.log(casaData);
   const client = new MongoClient(MONGO_URI, options);
 
   await client.connect();
-  const db = client.db("finalproject");
-  const result = await db.collection("Login").insertMany(login);
+  const db = client.db("venues");
+  const result = await db.collection("Casa").insertMany(casaData);
+
+  console.log(result);
 
   client.close();
-
-  result.status(200).json({ status: 200, data: result });
 };
+
+batchImport();
 
 module.exports = { batchImport };

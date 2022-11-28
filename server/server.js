@@ -3,8 +3,8 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 
 const { MongoClient } = require("mongodb");
-const { batchImport } = require("./batchImport");
-const { addNewUser } = require("./handlers");
+// const { batchImport } = require("./batchImport");
+const { getShows } = require("./handlers");
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -23,8 +23,10 @@ app.get("/hello", (req, res) => {
   });
 });
 
-app.post("/api/login/:user", addNewUser);
-app.post("/batch-import-data", batchImport);
+app.get("/shows-casa", getShows);
+
+// app.post("/api/login/:user", addNewUser);
+// app.post("/batch", batchImport);
 
 // handle 404
 app.use((req, res) => res.status(404).type("txt").send("🤷‍♂️"));
