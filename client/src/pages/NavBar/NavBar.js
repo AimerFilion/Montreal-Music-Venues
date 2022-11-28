@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-
+import { MdAccountCircle } from "react-icons/md";
 const NavBar = () => {
   return (
     <>
@@ -18,7 +18,10 @@ const NavBar = () => {
 
           <SecondWrapper>
             <div>
-              <NavLink to="/account">My account</NavLink>
+              <NavLink to="/account">
+                <MdAccountCircle size="29px" className="IconAccount" />
+                My account
+              </NavLink>
             </div>
           </SecondWrapper>
         </Wrapper>
@@ -42,11 +45,16 @@ const SecondWrapper = styled.div`
   width: 100vw;
   justify-content: flex-end;
   position: relative;
-  margin: 30px;
+  margin: 20px;
   a {
     font-size: 20px;
     color: #76ff03;
     text-decoration: none;
+  }
+  .IconAccount {
+    margin-right: 20px;
+    position: relative;
+    top: 10px;
   }
 `;
 

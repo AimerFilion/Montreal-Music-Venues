@@ -1,14 +1,22 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-const Explore = () => {
+
+const Explore = ({ venues, genre }) => {
   return (
     <>
       <Wrapper>
-        <TitleM>Montreal</TitleM> <TitleT>Tiohtià:ke</TitleT>
+        <TitleM>
+          Montreal <TitleT>Tiohtià:ke</TitleT>
+        </TitleM>
       </Wrapper>
-      <Genre>
-        <NavLink to="/genre">Genre</NavLink>
-      </Genre>
+      <Menu>
+        <Genre>
+          <NavLink to="/genre">Genre</NavLink>
+        </Genre>
+        <Venues>
+          <NavLink to="/venues">Venues</NavLink>
+        </Venues>
+      </Menu>
     </>
   );
 };
@@ -22,29 +30,44 @@ const Wrapper = styled.div`
 `;
 const TitleT = styled.h2`
   margin-left: 100px;
-  color: #fafafa;
+  color: black;
   font-size: 100px;
 `;
 
 const TitleM = styled.h2`
-  margin-top: 120px;
+  /* margin-top: 120px; */
   margin-left: 100px;
   color: #76ff03;
   font-size: 100px;
 `;
 
-const Genre = styled.div`
+const Menu = styled.div`
   display: flex;
   justify-content: flex-end;
+  gap: -20px;
+`;
 
+const Genre = styled.div`
   a {
-    background-color: #76ff03;
+    border: solid 2px #76ff03;
     padding: 15px 20px 15px 20px;
     border-radius: 20px;
     margin-right: 100px;
     margin-top: 10px;
     text-decoration: none;
-    color: black;
+    color: white;
+  }
+`;
+
+const Venues = styled.div`
+  a {
+    border: solid 2px #76ff03;
+    padding: 15px 20px 15px 20px;
+    border-radius: 20px;
+    margin-right: 100px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: white;
   }
 `;
 export default Explore;
