@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-
-const Explore = ({ venues, genre }) => {
+import Map from "./Map";
+const Explore = () => {
   return (
     <>
       <Wrapper>
-        <TitleM>
-          Montreal <TitleT>Tiohtià:ke</TitleT>
-        </TitleM>
+        <Title>Montreal Tiohtià:ke</Title>
       </Wrapper>
       <Menu>
         <Genre>
@@ -17,6 +15,7 @@ const Explore = ({ venues, genre }) => {
           <NavLink to="/venues">Venues</NavLink>
         </Venues>
       </Menu>
+      <Map />
     </>
   );
 };
@@ -28,16 +27,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   height: 400px;
 `;
-const TitleT = styled.h2`
+const Title = styled.h2`
   margin-left: 100px;
   color: black;
-  font-size: 100px;
-`;
-
-const TitleM = styled.h2`
-  /* margin-top: 120px; */
-  margin-left: 100px;
-  color: #76ff03;
   font-size: 100px;
 `;
 
