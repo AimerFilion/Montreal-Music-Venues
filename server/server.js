@@ -4,7 +4,14 @@ const morgan = require("morgan");
 
 const { MongoClient } = require("mongodb");
 // const { batchImport } = require("./batchImport");
-const { getShows } = require("./handlers");
+const {
+  getEventsCasa,
+  getEventsRitz,
+  addNewUser,
+  updateFavoriteEvent,
+  getUser,
+  // addEventKeyInFavoriteUser,
+} = require("./handlers");
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -23,10 +30,14 @@ app.get("/hello", (req, res) => {
   });
 });
 
-app.get("/shows-casa", getShows);
+app.get("/user/:email", getUser);
+app.get("/shows-casa", getEventsCasa);
+app.get("/shows-ritz", getEventsRitz);
+// app.get("/key", addEventKeyInFavoriteUser);
 
-// app.post("/api/login/:user", addNewUser);
-// app.post("/batch", batchImport);
+app.post("/new-user", addNewUser);
+// app.post("/batch-import", batchImport);
+app.patch("/update-favorites", updateFavoriteEvent);
 
 // handle 404
 app.use((req, res) => res.status(404).type("txt").send("🤷‍♂️"));
