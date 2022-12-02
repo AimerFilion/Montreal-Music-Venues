@@ -7,21 +7,20 @@ const options = {
   useUnifiedTopology: true,
 };
 
-const casaData = require("./data/VenueCasaDelPopolo.json");
+// const casaData = require("./data/VenueCasaDelPopolo.json");
+// const ritzData = require("./data/venueRitz.json");
+// const batchImport = async (req, res) => {
+//   const client = new MongoClient(MONGO_URI, options);
 
-const batchImport = async (req, res) => {
-  console.log(casaData);
-  const client = new MongoClient(MONGO_URI, options);
+//   await client.connect();
+//   const db = client.db("Events");
+//   const result = await db.collection("Ritz").insertMany(ritzData);
 
-  await client.connect();
-  const db = client.db("venues");
-  const result = await db.collection("Casa").insertMany(casaData);
+//   console.log(result);
 
-  console.log(result);
+//   client.close();
+// };
 
-  client.close();
-};
-
-batchImport();
+// batchImport();
 
 module.exports = { batchImport };
