@@ -35,9 +35,9 @@ const Map = () => {
         center={center}
         options={options}
         mapContainerStyle={{
-          margin: "50px 50px 50px 50px",
-          height: "100vh",
-          width: "150vh",
+          margin: "30px 30px 30px 30px",
+          height: "80vh",
+          width: "80vh",
         }}
       >
         {locations.map((location) => {
@@ -59,7 +59,10 @@ const Map = () => {
               setSelectedVenue(null);
             }}
           >
-            <div>{selectedVenue.venue}</div>
+            <div>
+              <h3>{selectedVenue.venue}</h3>
+              <p>{selectedVenue.address}</p>
+            </div>
           </InfoWindow>
         )}
       </GoogleMap>
