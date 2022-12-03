@@ -1,8 +1,47 @@
 import { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+
+import InfoShow from "./InfoShow";
 import styled from "styled-components";
-import { MdPlace } from "react-icons/md";
-const Home = () => {
-  const [shows, setShows] = useState([]);
+import SelectedEvent from "./SelectedEvent";
+
+const Home = ({}) => {
+  // Data for Casa + Sala
+  const [showsCasa, setShowsCasa] = useState([]);
+  // Data for Ritz
+  const [showsRitz, setShowsRitz] = useState([]);
+  const [favoriteEventData, setFavoriteEventData] = useState([]);
+  const { user, isAuthenticated } = useAuth0();
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      fetch(`/user/${user.email}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setFavoriteEventData(data.data);
+        });
+    }
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetch("/new-user", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     fetch("/shows-casa")
@@ -10,86 +49,119 @@ const Home = () => {
         return res.json();
       })
       .then((shows) => {
-        console.log(shows.data);
-        setShows(shows.data);
+        setShowsCasa(shows.data);
+      })
+      .then(() => {
+        fetch("/shows-ritz")
+          .then((res) => res.json())
+          .then((data) => {
+            setShowsRitz(data.data);
+          });
       });
   }, []);
 
-  const casa = Object.values(shows);
-  console.log(casa);
+  const events = showsCasa.concat(showsRitz);
+
+  const eventsShow = events.map((show) => {
+    const showDate = show.date.split(",");
+    const [, ...rest] = showDate;
+    const d = new Date(Date.parse(rest.join(",").replace(/TH|ST|ND|RD/g, ",")));
+    return { ...show, date: d.toDateString() };
+  });
+
+  eventsShow.sort((a, b) => {
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  const groupedByDate = {};
+
+  eventsShow.forEach((venue) => {
+    const date = venue.date;
+    if (groupedByDate.hasOwnProperty(venue.date)) {
+      // the date for this venue already exists in groupedByDate obj
+      // we simply add this venue info to the value of the property
+      groupedByDate[date] = [...groupedByDate[date], venue];
+    } else {
+      // the date for this venue doesn't exist yet
+      // add a new property(venue date) to the object and the value(venue info)
+      groupedByDate[date] = [venue];
+    }
+  });
+
+  // after this line groupedByDate is:
+
+  // we loop through each key-value to display the info
+  const groupedByDates = Object.keys(groupedByDate).map((date) => {
+    // console.log(date);
+    const venues = groupedByDate[date].map((venue) => venue);
+    // instead of console.log venues, you simply need to deliver the JSX component
+    return venues;
+  });
+
+  const pickEvent = (event) => {
+    setSelectedEvent(event);
+  };
+  console.log(selectedEvent);
 
   return (
     <>
-      <Global>
-        <Header>EVENTS OF THE WEEK</Header>
-
-        {casa.map((show) => {
+      {/* {!groupedByDates && <div>Loading...</div>} */}
+      <Wrapper>
+        <Header>MUSIC VENUES</Header>
+      </Wrapper>
+      <Block>
+        <p>EVENTS CALENDAR </p>
+      </Block>
+      {favoriteEventData.length !== 0 &&
+        eventsShow.map((show) => {
           return (
             <>
-              <div></div>
-              <Wrapper>
-                <Image src={show.img} />
-                <InfoShow>
-                  <Title>{show.title}</Title>
-                  <Address>
-                    <MdPlace color="#76ff03" size="23px" />
-                    {show.address}
-                  </Address>
-                  {/* <li>{show.date}</li> */}
-                </InfoShow>
-              </Wrapper>
+              <Global>
+                <InfoShow
+                  title={show.title}
+                  address={show.address}
+                  date={show.date}
+                  img={show.img}
+                  event_id={show._id}
+                  favoriteEventData={favoriteEventData}
+                  setFavoriteEventData={setFavoriteEventData}
+                />
+                <SelectedEvent events={events} pickEvent={pickEvent} />
+              </Global>
             </>
           );
         })}
-      </Global>
     </>
   );
 };
 
 const Header = styled.h2`
   color: #76ff03;
-  font-size: 40px;
+  font-size: 70px;
+  margin-left: 100px;
+  margin-top: 70px;
 `;
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 80px 80px 60px;
-  color: white;
-  column-gap: -100px;
-  row-gap: 10px;
-  border-bottom: solid 1px #484848;
-  margin-top: 50px;
-`;
-
-const Title = styled.li`
-  font-size: 25px;
-  color: white;
-  font-weight: bold;
-  /* margin-top: 10px; */
-`;
-const Address = styled.li`
-  font-size: 18px;
-  font-weight: lighter;
-  color: white;
-  margin-top: 40px;
-`;
-
-const InfoShow = styled.ul`
-  color: white;
-  font-size: 15px;
-  list-style: none;
-`;
-
-const Image = styled.img`
-  width: 300px;
+  align-items: flex-start;
+  background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
   height: 200px;
 `;
 
-const Global = styled.body`
+const Global = styled.div`
   max-width: 100vh;
-  margin-left: 200px;
-  margin-top: 100px;
+  margin-left: 100px;
+  margin-top: 50px;
 `;
 
+const Block = styled.div`
+  p {
+    font-size: 30px;
+    margin-left: 100px;
+    font-weight: bold;
+    color: white;
+  }
+`;
 export default Home;

@@ -50,7 +50,6 @@ const getEventsRitz = async (req, res) => {
   }
 };
 
-// const updateDateRitz = async (req, res) => {
 //   const client = new MongoClient(MONGO_URI, options);
 //   try {
 //     await client.connect();
@@ -84,7 +83,7 @@ const getUser = async (req, res) => {
     await client.connect();
     const db = client.db("User");
 
-    const result = await db.collection("User1").findOne({ email });
+    const result = await db.collection("users").findOne({ email });
 
     res.status(200).json({
       ok: 200,
@@ -148,6 +147,8 @@ const addNewUser = async (req, res) => {
 const updateFavoriteEvent = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   const { email, event_id } = req.body;
+  console.log(req.body);
+  console.log("event id", event_id);
   try {
     await client.connect();
     const db = client.db("User");
@@ -159,18 +160,19 @@ const updateFavoriteEvent = async (req, res) => {
     // INSERT all the favorite event in the profil user
     const result = await db.collection("users").findOne({ email });
     console.log(result);
-    const query = { email, "favorite.event_id": ObjectId(event_id) };
 
-    const update = { $set: { "favorite.$.isFavorite": true } };
+    const query = { email, "favorites._id": ObjectId(event_id) };
+
+    const update = { $set: { "favorites.$.isFavorite": true } };
 
     const result1 = await db.collection("users").updateOne(query, update);
-    console.log(result1);
+
     res.status(200).json({
       ok: 200,
       data: result1,
     });
   } catch (error) {
-    console.error(error.stack);
+    console.error(error);
     return res.status(500).json({ ok: false, data: null });
   } finally {
     client.close();
