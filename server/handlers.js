@@ -209,22 +209,15 @@ const addNewUser = async (req, res) => {
   }
 };
 
-const updateFavoriteEvent = async (req, res) => {
+const eventFavorite = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   const { email, event_id } = req.body;
-  console.log(req.body);
-  console.log("event id", event_id);
+
   try {
     await client.connect();
     const db = client.db("User");
 
-    // FIND the Event _id is the same as the favorite key
-    // UPDATE the value for true
-    // Not sure if I do the third one in this function
-
-    // INSERT all the favorite event in the profil user
     const result = await db.collection("users").findOne({ email });
-    console.log(result);
 
     const query = { email, "favorites._id": ObjectId(event_id) };
 
@@ -244,6 +237,33 @@ const updateFavoriteEvent = async (req, res) => {
   }
 };
 
+const unFavoriteEvent = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  const { email, event_id } = req.body;
+
+  try {
+    await client.connect();
+    const db = client.db("User");
+
+    const result = await db.collection("users").findOne({ email });
+
+    const query = { email, "favorites._id": ObjectId(event_id) };
+
+    const update = { $set: { "favorites.$.isFavorite": false } };
+
+    const result1 = await db.collection("users").updateOne(query, update);
+
+    res.status(200).json({
+      ok: 200,
+      data: result1,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ ok: false, data: null });
+  } finally {
+    client.close();
+  }
+};
 // const addEventKeyInFavoriteUser = async (req, res) => {
 //   const client = new MongoClient(MONGO_URI, options);
 //   try {
@@ -282,7 +302,8 @@ module.exports = {
   getEventsRitz,
   addNewUser,
   getUser,
-  updateFavoriteEvent,
+  eventFavorite,
+  unFavoriteEvent,
   getFavoriteEvent,
   getVenueInfo,
   // addEventKeyInFavoriteUser,

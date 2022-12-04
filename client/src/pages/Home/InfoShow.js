@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { MdPlace } from "react-icons/md";
-import { GiLockedHeart } from "react-icons/gi";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
@@ -20,9 +20,9 @@ const InfoShow = ({
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [favoriteEvent, setFavoriteEvent] = useState(false);
 
-  const addFavoriteEvent = (e) => {
+  const eventFavorite = async (e) => {
     e.preventDefault();
-    fetch("/update-favorites", {
+    await fetch("/favorite", {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -35,11 +35,25 @@ const InfoShow = ({
         setFavoriteEvent(true);
       });
   };
+  const unFavoriteEvent = async (e) => {
+    e.preventDefault();
+    await fetch("/unfavorite", {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: user.email, event_id }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setFavoriteEvent(false);
+      });
+  };
 
   const findEvent = favoriteEventData.favorites.find((event) => {
     return event._id === event_id;
   });
-  console.log("Event:", event_id);
 
   return (
     <>
@@ -60,9 +74,15 @@ const InfoShow = ({
           </Address>
         </Infoshow>
       </Wrapper>
+
       {isAuthenticated && !favoriteEvent && findEvent.isFavorite === false && (
-        <Button onClick={addFavoriteEvent}>
-          <GiLockedHeart size="20px" />
+        <Button onClick={eventFavorite}>
+          <AiOutlineHeart size="20px" />
+        </Button>
+      )}
+      {isAuthenticated && favoriteEvent && (
+        <Button onClick={unFavoriteEvent}>
+          <AiFillHeart size="20px" />
         </Button>
       )}
       {!isAuthenticated && null}

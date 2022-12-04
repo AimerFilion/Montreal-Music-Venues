@@ -8,7 +8,8 @@ const {
   getEventsCasa,
   getEventsRitz,
   addNewUser,
-  updateFavoriteEvent,
+  unFavoriteEvent,
+  eventFavorite,
   getUser,
   getFavoriteEvent,
   getVenueInfo,
@@ -40,8 +41,8 @@ app.get("/user/:email", getUser);
 app.post("/new-user", addNewUser);
 // app.post("/batch-import", batchImport);
 
-app.patch("/update-favorites", updateFavoriteEvent);
-
+app.patch("/favorite", eventFavorite);
+app.patch("/unfavorite", unFavoriteEvent);
 // Events
 app.get("/shows-casa", getEventsCasa);
 app.get("/shows-ritz", getEventsRitz);
