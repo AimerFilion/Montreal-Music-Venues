@@ -19,7 +19,7 @@ const NavBar = () => {
           <SecondWrapper>
             <div>
               <NavLink to="/account">
-                <MdAccountCircle size="29px" className="IconAccount" />
+                <MdAccountCircle size="20px" className="IconAccount" />
                 My account
               </NavLink>
             </div>
@@ -34,9 +34,10 @@ export default NavBar;
 
 const Wrapper = styled.div`
   display: flex;
-  width: 100vw;
+  max-width: 100vw;
+  max-height: 100vh;
   justify-content: flex-start;
-  background-color: #000000;
+  background-color: white;
   z-index: 1;
 `;
 
@@ -47,22 +48,24 @@ const SecondWrapper = styled.div`
   position: relative;
   margin: 20px;
   a {
-    font-size: 20px;
+    font-size: 15px;
     color: #76ff03;
     text-decoration: none;
+    margin-left: 100px;
   }
   .IconAccount {
     margin-right: 20px;
     position: relative;
-    top: 10px;
+    top: 6px;
   }
 `;
 
 const HomeStyle = styled.p`
   margin: 30px;
+  margin-left: 100px;
 
   a {
-    font-size: 20px;
+    font-size: 15px;
     color: #76ff03;
     text-decoration: none;
   }
@@ -72,7 +75,7 @@ const ExploreStyle = styled.div`
   margin: 30px;
 
   a {
-    font-size: 20px;
+    font-size: 15px;
     color: #76ff03;
     text-decoration: none;
   }
@@ -81,7 +84,7 @@ const AboutStyle = styled.div`
   margin: 30px;
 
   a {
-    font-size: 20px;
+    font-size: 15px;
     color: #76ff03;
     text-decoration: none;
   }

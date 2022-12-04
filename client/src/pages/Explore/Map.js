@@ -5,8 +5,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-// import { GoogleMapsProvider } from "@ubilabs/google-maps-react-hooks";
-import { MarkerClusterer } from "@googlemaps/markerclusterer";
+
 import mapStyles from "./mapStyles";
 import locations from "./Locations.js";
 
