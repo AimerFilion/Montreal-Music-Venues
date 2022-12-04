@@ -75,17 +75,19 @@ const InfoShow = ({
         </Infoshow>
       </Wrapper>
 
-      {isAuthenticated && !favoriteEvent && findEvent.isFavorite === false && (
-        <Button onClick={eventFavorite}>
-          <AiOutlineHeart size="20px" />
-        </Button>
-      )}
-      {isAuthenticated && favoriteEvent && (
-        <Button onClick={unFavoriteEvent}>
-          <AiFillHeart size="20px" />
-        </Button>
-      )}
-      {!isAuthenticated && null}
+      {isAuthenticated ? (
+        <>
+          {findEvent.isFavorite === false && !favoriteEvent ? (
+            <Button onClick={eventFavorite}>
+              <AiOutlineHeart size="20px" />
+            </Button>
+          ) : (
+            <Button onClick={unFavoriteEvent}>
+              <AiFillHeart size="20px" />
+            </Button>
+          )}
+        </>
+      ) : null}
     </>
   );
 };
