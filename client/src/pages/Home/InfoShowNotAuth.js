@@ -1,50 +1,12 @@
 import styled from "styled-components";
 import { MdPlace } from "react-icons/md";
-import { GiLockedHeart } from "react-icons/gi";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
-
-import VenuesInfo from "../VenuesInfo";
-
-const InfoShow = ({
-  img,
-  title,
-  address,
-  date,
-  event_id,
-  venue_id,
-  ticket,
-  favoriteEventData,
-}) => {
+import { NavLink } from "react-router-dom";
+const InfoShowNotAuth = ({ img, title, address, date, event_id }) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const [favoriteEvent, setFavoriteEvent] = useState(false);
-
-  const addFavoriteEvent = (e) => {
-    e.preventDefault();
-    fetch("/update-favorites", {
-      method: "PATCH",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: user.email, event_id }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setFavoriteEvent(true);
-      });
-  };
-
-  const findEvent = favoriteEventData.favorites.find((event) => {
-    return event._id === event_id;
-  });
-  console.log("Event:", event_id);
-
   return (
     <>
       <Date>{date}</Date>
-
       <Wrapper>
         <Image src={img} />
         <Infoshow>
@@ -53,19 +15,10 @@ const InfoShow = ({
           </NavLink>
           <Address>
             <MdPlace color="#76ff03" size="23px" />
-            <NavLink to={`./venue/${venue_id}`}>{address}</NavLink>
-            <a href={ticket} target="_blank">
-              Ticket
-            </a>
+            {address}
           </Address>
         </Infoshow>
       </Wrapper>
-      {isAuthenticated && !favoriteEvent && findEvent.isFavorite === false && (
-        <Button onClick={addFavoriteEvent}>
-          <GiLockedHeart size="20px" />
-        </Button>
-      )}
-      {!isAuthenticated && null}
     </>
   );
 };
@@ -124,4 +77,5 @@ const Button = styled.div`
     color: white;
   }
 `;
-export default InfoShow;
+
+export default InfoShowNotAuth;
