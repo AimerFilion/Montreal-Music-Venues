@@ -4,8 +4,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import InfoShow from "./InfoShow";
 import styled from "styled-components";
 import SelectedEvent from "./SelectedEvent";
+import InfoShowNotAuth from "./InfoShowNotAuth";
 
-const Home = ({}) => {
+const Home = () => {
   // Data for Casa + Sala
   const [showsCasa, setShowsCasa] = useState([]);
   // Data for Ritz
@@ -25,6 +26,7 @@ const Home = ({}) => {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           setFavoriteEventData(data.data);
         });
     }
@@ -49,12 +51,14 @@ const Home = ({}) => {
         return res.json();
       })
       .then((shows) => {
+        //console.log(shows.data);
         setShowsCasa(shows.data);
       })
       .then(() => {
         fetch("/shows-ritz")
           .then((res) => res.json())
           .then((data) => {
+            // console.log("here", data.data);
             setShowsRitz(data.data);
           });
       });
@@ -98,14 +102,12 @@ const Home = ({}) => {
     return venues;
   });
 
-  const pickEvent = (event) => {
-    setSelectedEvent(event);
-  };
-  console.log(selectedEvent);
+  // const pickEvent = (event) => {
+  //   setSelectedEvent(event);
+  // };
 
   return (
     <>
-      {/* {!groupedByDates && <div>Loading...</div>} */}
       <Wrapper>
         <Header>MUSIC VENUES</Header>
       </Wrapper>
@@ -121,12 +123,30 @@ const Home = ({}) => {
                   title={show.title}
                   address={show.address}
                   date={show.date}
+                  venue_id={show.venue_id}
                   img={show.img}
+                  ticket={show.ticket}
                   event_id={show._id}
                   favoriteEventData={favoriteEventData}
                   setFavoriteEventData={setFavoriteEventData}
                 />
-                <SelectedEvent events={events} pickEvent={pickEvent} />
+                {/* <SelectedEvent events={events} pickEvent={pickEvent} /> */}
+              </Global>
+            </>
+          );
+        })}
+      {!isAuthenticated &&
+        eventsShow.map((show) => {
+          return (
+            <>
+              <Global>
+                <InfoShowNotAuth
+                  title={show.title}
+                  address={show.address}
+                  date={show.date}
+                  img={show.img}
+                  event_id={show._id}
+                />
               </Global>
             </>
           );

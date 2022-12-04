@@ -9,6 +9,38 @@ const options = {
   useUnifiedTopology: true,
 };
 
+// Venues
+const getVenueInfo = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  const { venue_id } = req.params;
+  try {
+    await client.connect();
+    const db = client.db("Venues");
+
+    const result = await db.collection("Venues").findOne(ObjectId(venue_id));
+
+    // const lookForTitle = result.filter((_id) => {
+    //   return _id;
+    // });
+
+    // console.log(lookForTitle);
+
+    // const queries = lookForTitle.map((favorite) => {
+    //   return { _id: favorite._id };
+    // });
+
+    res.status(200).json({
+      ok: 200,
+      data: result,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ ok: false, data: null });
+  } finally {
+    client.close();
+  }
+};
+
 // Events
 const getEventsCasa = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
@@ -75,6 +107,39 @@ const getEventsRitz = async (req, res) => {
 // };
 
 // User
+
+const getFavoriteEvent = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  const { email } = req.params;
+  try {
+    await client.connect();
+    const db = client.db("User");
+
+    const result = await db.collection("users").findOne({ email });
+
+    const lookForFavorites = result.favorites.filter((favorite) => {
+      return favorite.isFavorite;
+    });
+    const queries = lookForFavorites.map((favorite) => {
+      return { _id: favorite._id };
+    });
+
+    const db2 = client.db("Events");
+    const casa = await db2.collection("Casa").find({ $or: queries }).toArray();
+    const ritz = await db2.collection("Ritz").find({ $or: queries }).toArray();
+    const allEvents = [...casa, ...ritz];
+
+    res.status(200).json({
+      ok: 200,
+      data: allEvents,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ ok: false, data: null });
+  } finally {
+    client.close();
+  }
+};
 
 const getUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
@@ -218,5 +283,7 @@ module.exports = {
   addNewUser,
   getUser,
   updateFavoriteEvent,
+  getFavoriteEvent,
+  getVenueInfo,
   // addEventKeyInFavoriteUser,
 };

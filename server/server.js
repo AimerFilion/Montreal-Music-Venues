@@ -10,6 +10,8 @@ const {
   addNewUser,
   updateFavoriteEvent,
   getUser,
+  getFavoriteEvent,
+  getVenueInfo,
   // addEventKeyInFavoriteUser,
 } = require("./handlers");
 
@@ -30,17 +32,25 @@ app.get("/hello", (req, res) => {
   });
 });
 
+// User
+app.get("/user/:email/favorites", getFavoriteEvent);
 app.get("/user/:email", getUser);
-app.get("/shows-casa", getEventsCasa);
-app.get("/shows-ritz", getEventsRitz);
-// app.get("/key", addEventKeyInFavoriteUser);
+// app.get("/key", getEventKeyInFavoriteUser);
 
 app.post("/new-user", addNewUser);
 // app.post("/batch-import", batchImport);
+
 app.patch("/update-favorites", updateFavoriteEvent);
 
+// Events
+app.get("/shows-casa", getEventsCasa);
+app.get("/shows-ritz", getEventsRitz);
+
+// Venues
+app.get("/venue/:venue_id", getVenueInfo);
+
 // handle 404
-app.use((req, res) => res.status(404).type("txt").send("🤷‍♂️"));
+app.use((req, res) => res.status(404).type("txt").send(" 🤷‍♂️"));
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
