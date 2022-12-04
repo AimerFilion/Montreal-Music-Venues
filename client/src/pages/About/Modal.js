@@ -16,15 +16,14 @@ const Modal = ({ toggleModal, children }) => {
 };
 const ModalWindow = styled.div`
   left: 50%;
-  top: 50%;
+  top: 800px;
   position: absolute;
   transform: translate(-50%, -50%);
-
   background: #fbfbfb;
   box-sizing: border-box;
   padding: 60px;
-  max-width: 800px;
-  width: calc(100vw - 60px);
+  max-width: 600px;
+  width: calc(100vw - 50px);
   z-index: 3;
 
   @media (max-width: 700px) {
