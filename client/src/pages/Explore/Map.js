@@ -34,9 +34,12 @@ const Map = () => {
         center={center}
         options={options}
         mapContainerStyle={{
-          margin: "30px 30px 30px 30px",
-          height: "80vh",
-          width: "80vh",
+          margin: "-20px 30px 40px 30px",
+          // position: "fixed",
+          // top: "50%",
+          // left: "50%",
+          height: "89vh",
+          width: "95%",
         }}
       >
         {locations.map((location) => {
