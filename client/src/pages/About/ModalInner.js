@@ -5,7 +5,7 @@ import { ImSmile2 } from "react-icons/im";
 import Form from "./Form";
 
 const ModalInner = () => {
-  const [msgSucess, setMsgSuccess] = useState(false);
+  const [msgSuccess, setMsgSuccess] = useState(false);
   const [subscribe, setSubscribe] = useState(true);
 
   const handleSuccess = () => {
@@ -17,7 +17,7 @@ const ModalInner = () => {
   };
   return (
     <Container>
-      {msgSucess ? (
+      {msgSuccess ? (
         <>
           <Title>We received your message!</Title>
           <Paragraphe>We will answer your message soon! </Paragraphe>
@@ -26,13 +26,6 @@ const ModalInner = () => {
       ) : (
         <>
           <Title>ANY QUESTIONS?</Title>
-
-          {/* {if(subscribe === true ) {
-<p>
-and thank you for subscribing to our newsletter!
-<TfiFaceSmile />
-</p>    
-          } } */}
 
           <Form
             handleSuccess={handleSuccess}

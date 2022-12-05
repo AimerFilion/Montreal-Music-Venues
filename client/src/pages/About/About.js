@@ -13,7 +13,7 @@ const About = () => {
     setShowModal((showModal) => !showModal);
   };
   return (
-    <>
+    <Wrapper>
       <Title>
         A platform to discover music venues in Montreal known as Tiohtia:ke
       </Title>
@@ -45,14 +45,14 @@ const About = () => {
       </P2>
 
       {showModal && <Modal toggleModal={toggleModal}></Modal>}
-      <Follow>FOLLOW US</Follow>
+      <Follow></Follow>
       <SocialMedia>
         <AiFillInstagram size="30px" color="#76ff03" cursor="pointer" />
         <AiFillFacebook size="30px" color="#76ff03" cursor="pointer" />
         <AiOutlineTwitter size="30px" color="#76ff03" cursor="pointer" />
         <Button onClick={toggleModal}>Contact us</Button>
       </SocialMedia>
-    </>
+    </Wrapper>
   );
 };
 
@@ -99,21 +99,31 @@ const Follow = styled.p`
   text-transform: uppercase;
   padding: 25px 0 20px;
   width: 200px;
-  /* border: 2px solid #76ff03;
-  border-radius: 50%; */
   color: #fbfbfb;
+  @media screen and (max-width: 450px) {
+    height: 40px;
+    margin: 60px 0 0 0;
+    text-align: center;
+  }
 `;
 const SocialMedia = styled.div`
   display: flex;
   justify-content: center;
   height: 80px;
   margin: 200px 0 0 0;
+  @media screen and (max-width: 450px) {
+    height: 40px;
+    margin: 30px 0 0 0;
+  }
 `;
 
 const Button = styled.button`
+  position: fixed; /* or absolute */
+  top: 75%;
   left: 50%;
-  top: 100%;
-  position: absolute;
+  /* left: 50%;
+  top: 20%; */
+  /* position: absolute; */
   transform: translate(-50%, -50%);
   background: none;
   border: 2px solid #76ff03;
@@ -126,11 +136,14 @@ const Button = styled.button`
   padding: 25px 0 20px;
   width: 200px;
   z-index: 1;
-  margin: 420px 0 0 0;
+  /* margin: 420px 0 0 0; */
 
-  @media (max-width: 700px) {
-    font-size: 24px;
-    width: 220px;
+  @media screen and (max-width: 450px) {
+    max-width: 100%;
+    top: 60%;
+    left: 50%;
   }
 `;
+
+const Wrapper = styled.div``;
 export default About;

@@ -16,8 +16,8 @@ const Modal = ({ toggleModal, children }) => {
 };
 const ModalWindow = styled.div`
   left: 50%;
-  top: 800px;
-  position: absolute;
+  top: 50%;
+  position: fixed;
   transform: translate(-50%, -50%);
   background: #fbfbfb;
   box-sizing: border-box;

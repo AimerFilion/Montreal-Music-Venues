@@ -13,11 +13,6 @@ const Form = ({ handleSuccess, handleSubscribe }) => {
         <Label for="message">What's up?</Label>
         <TextArea name="message" minLength="5" maxLength="200"></TextArea>
 
-        <Label onClick={handleSubscribe} for="subscribe">
-          Subscribe to our newsletter
-        </Label>
-        <input name="subscribe" type="checkbox"></input>
-
         <Button type="submit">Submit</Button>
       </form>
     </>
