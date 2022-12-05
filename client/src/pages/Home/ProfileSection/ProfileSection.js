@@ -4,6 +4,7 @@ import styled from "styled-components";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import SmallShow from "../../../composant/SmallShow";
+import { BsEmojiSmile } from "react-icons/bs";
 
 const ProfileSection = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -35,23 +36,29 @@ const ProfileSection = () => {
         {isAuthenticated && (
           <>
             <Block>
-              <p>ACCOUNT</p>
+              <p>
+                HELLO <BsEmojiSmile /> {user.name} <LogoutButton />
+              </p>
             </Block>
-            <Wrapper>
+
+            <Menu>
+              <p>YOUR FAVE EVENTS</p>
+            </Menu>
+            {/* <Wrapper>
               <ImageProfil src={user.picture} alt={user.name} />
-              <h2>{user.name}</h2>
               <p>{user.email}</p>
-              <LogoutButton />
-              <h3>Your favorite show</h3>
-              {isFavorite &&
-                isFavorite.map((favorite) => {
-                  return <SmallShow show={favorite} />;
-                })}
-            </Wrapper>
+            </Wrapper> */}
+            {isFavorite &&
+              isFavorite.map((favorite) => {
+                return <SmallShow show={favorite} />;
+              })}
           </>
         )}
         {!isAuthenticated && (
           <div>
+            <Block>
+              <p>LOGIN</p>
+            </Block>
             <LoginButton />
           </div>
         )}
@@ -61,14 +68,13 @@ const ProfileSection = () => {
 };
 
 const Wrapper = styled.div`
-  /* display: flex; */
-  flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* background-color: white; */
+  max-width: 500px;
+  text-align: center;
   color: #dd2c00;
   /* padding-bottom: 200px; */
-  border: green 2px solid;
+  button {
+    margin: 20px 5px 0 0;
+  }
 `;
 
 const ImageProfil = styled.img`
@@ -79,13 +85,25 @@ const ImageProfil = styled.img`
 
 const Block = styled.div`
   padding: 10px;
-  /* background-color: #76ff03; */
+  background-color: white;
   height: 170px;
   p {
-    color: white;
-    font-size: 70px;
+    color: black;
+    font-size: 50px;
     margin-left: 100px;
     margin-top: 80px;
+    font-weight: bold;
+  }
+`;
+
+const Menu = styled.div`
+  padding: 30px;
+  background-color: #dd2c00;
+  height: 40px;
+  p {
+    color: white;
+    font-size: 25px;
+    margin: 0 0 0px 100px;
     font-weight: bold;
   }
 `;
