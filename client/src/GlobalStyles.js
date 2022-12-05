@@ -9,6 +9,8 @@ const GlobalStyles = createGlobalStyle`
         text-rendering: optimizeLegibility;
     }
 
-`;
 
+
+
+`;
 export default GlobalStyles;

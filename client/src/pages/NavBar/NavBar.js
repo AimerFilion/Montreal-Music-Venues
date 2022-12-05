@@ -19,7 +19,7 @@ const NavBar = () => {
           <SecondWrapper>
             <div>
               <NavLink to="/account">
-                <MdAccountCircle size="20px" className="IconAccount" />
+                {/* <MdAccountCircle size="20px" className="IconAccount" /> */}
                 My account
               </NavLink>
             </div>
@@ -34,11 +34,12 @@ export default NavBar;
 
 const Wrapper = styled.div`
   display: flex;
-  max-width: 100vw;
-  max-height: 100vh;
   justify-content: flex-start;
   background-color: white;
   z-index: 1;
+  @media screen and (max-width: 450px) {
+    margin-top: 0px;
+  }
 `;
 
 const SecondWrapper = styled.div`
@@ -46,17 +47,17 @@ const SecondWrapper = styled.div`
   width: 100vw;
   justify-content: flex-end;
   position: relative;
-  margin: 20px;
+  margin: 30px 120px 0 0;
   a {
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: 500;
     color: #76ff03;
     text-decoration: none;
     margin-left: 100px;
   }
-  .IconAccount {
-    margin-right: 20px;
-    position: relative;
-    top: 6px;
+
+  @media screen and (max-width: 450px) {
+    width: 0;
   }
 `;
 
@@ -65,9 +66,13 @@ const HomeStyle = styled.p`
   margin-left: 100px;
 
   a {
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: 500;
     color: #76ff03;
     text-decoration: none;
+  }
+  @media screen and (max-width: 450px) {
+    margin-left: 10px;
   }
 `;
 
@@ -75,17 +80,25 @@ const ExploreStyle = styled.div`
   margin: 30px;
 
   a {
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: 500;
     color: #76ff03;
     text-decoration: none;
+  }
+  @media screen and (max-width: 450px) {
+    margin-left: 0px;
   }
 `;
 const AboutStyle = styled.div`
   margin: 30px;
 
   a {
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: 500;
     color: #76ff03;
     text-decoration: none;
+  }
+  @media screen and (max-width: 450px) {
+    margin-left: 0px;
   }
 `;

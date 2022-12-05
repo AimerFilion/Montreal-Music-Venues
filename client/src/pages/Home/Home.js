@@ -108,17 +108,18 @@ const Home = () => {
 
   return (
     <>
+      <Header>
+        <h2>EVENTS CALENDAR</h2>
+      </Header>
       <Wrapper>
-        <Header>MUSIC VENUES</Header>
-      </Wrapper>
-      <Block>
-        <p>EVENTS CALENDAR </p>
-      </Block>
-      {favoriteEventData.length !== 0 &&
-        eventsShow.map((show) => {
-          return (
-            <>
-              <Global>
+        <Block>
+          <p></p>
+        </Block>
+        {favoriteEventData.length !== 0 &&
+          eventsShow.map((show) => {
+            return (
+              <>
+                {/* <Global> */}
                 <InfoShow
                   title={show.title}
                   address={show.address}
@@ -131,55 +132,55 @@ const Home = () => {
                   setFavoriteEventData={setFavoriteEventData}
                 />
                 {/* <SelectedEvent events={events} pickEvent={pickEvent} /> */}
-              </Global>
-            </>
-          );
-        })}
-      {!isAuthenticated &&
-        eventsShow.map((show) => {
-          return (
-            <>
-              <Global>
+                {/* </Global> */}
+              </>
+            );
+          })}
+        {!isAuthenticated &&
+          eventsShow.map((show) => {
+            return (
+              <>
+                {/* <Global> */}
                 <InfoShowNotAuth
                   title={show.title}
                   address={show.address}
                   date={show.date}
                   img={show.img}
                   event_id={show._id}
+                  ticket={show.ticket}
                 />
-              </Global>
-            </>
-          );
-        })}
+                {/* </Global> */}
+              </>
+            );
+          })}
+      </Wrapper>
     </>
   );
 };
 
-const Header = styled.h2`
+const Header = styled.div`
   color: #76ff03;
-  font-size: 70px;
-  margin-left: 100px;
-  margin-top: 70px;
+
+  height: 200px;
+  background-color: #eeeeee;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  h2 {
+    font-size: 70px;
+    padding-left: 80px;
+  }
 `;
 
 const Wrapper = styled.div`
-  align-items: flex-start;
-  background-color: #eeeeee;
-  display: flex;
-  flex-direction: column;
-  height: 200px;
-`;
-
-const Global = styled.div`
-  max-width: 100vh;
-  margin-left: 100px;
-  margin-top: 50px;
+  /* margin-left: 80px;
+  margin-top: 50px; */
 `;
 
 const Block = styled.div`
   p {
     font-size: 30px;
-    margin-left: 100px;
+    padding-bottom: 10px;
     font-weight: bold;
     color: white;
   }
