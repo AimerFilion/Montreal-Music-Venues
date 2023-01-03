@@ -1,4 +1,4 @@
-# Montreal Music Venues: MMV
+# Montreal Music Venues
 My final project. A website where all Montreal music venues are gathered in one place. 
 
 ## About
