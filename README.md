@@ -2,7 +2,7 @@
 My final project. A website where all Montreal music venues are gathered in one place. 
 
 ## About
-The aim of this project was to create a centralized wev app that allow users to skip the step of manually searching through individual venue websites, to view events. The web app would allow users to discover new artists/bands close to their area. My primary focus is to give visibility to local bands or bands that are not yet well-established. 
+The aim of this project was to create a centralized web app that allow users to skip the step of manually searching through individual venue websites, to view events. The web app would allow users to discover new artists/bands close to their area. My primary focus is to give visibility to local bands or bands that are not yet well-established. 
 
 ## Homepage 
 https://user-images.githubusercontent.com/112727028/210414133-68f29bb4-b828-40a7-b2b0-2876b5515d80.mp4
