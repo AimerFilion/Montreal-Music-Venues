@@ -16,14 +16,16 @@ https://user-images.githubusercontent.com/112727028/210448057-128b3b48-cd40-4421
 
 
 ## Explore 
-### Location of each music venue using a Google map API 
+### Location of each music venue with Google map API 
 The user can explore the map and find the location of each music venues
 
 https://user-images.githubusercontent.com/112727028/210448014-55241973-50b7-43e6-bff6-dd2ea9ce6feb.mp4
 
 
 ## Profile
-### Login with Auth0 + Saved favorites events 
+### Login with Auth0 
+Information of the user
+Saved favorite event
 
 https://user-images.githubusercontent.com/112727028/210447979-790a09a6-20c3-4b34-8935-6feac16e1e7c.mp4
 
