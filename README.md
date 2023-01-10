@@ -7,7 +7,7 @@
 The aim of this project was to create a centralized web app, which would allow users to skip the step of viewing events by manually searching through each individual venue's website. The web app would allow users to discover new artists/bands close to their area. My primary focus is to give visibility to local bands or bands that are not yet well-established.
 
 ## Homepage 
-### Calendar for each event happening in Montreal with the library Puppeteer
+### Calendar for each event happening in Montreal 
 - Like button to save favorite events
 - Link to buy tickets 
 - Link to the music venue
