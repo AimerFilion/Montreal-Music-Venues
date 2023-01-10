@@ -7,12 +7,13 @@
 The aim of this project was to create a centralized web app, which would allow users to skip the step of viewing events by manually searching through each individual venue's website. The web app would allow users to discover new artists/bands close to their area. My primary focus is to give visibility to local bands or bands that are not yet well-established.
 
 ## Homepage 
-https://user-images.githubusercontent.com/112727028/210448057-128b3b48-cd40-4421-a3fc-211350d7e9a6.mp4
-Calendar of every music shows happening in each music venues
-Features: 
+### Calendar of every music shows happening in each music venues
+### Features: 
 - Like button to save favorite events
 - Link to buy tickets 
 - Link to the music venue
+https://user-images.githubusercontent.com/112727028/210448057-128b3b48-cd40-4421-a3fc-211350d7e9a6.mp4
+
 
 ## Explore 
 https://user-images.githubusercontent.com/112727028/210448014-55241973-50b7-43e6-bff6-dd2ea9ce6feb.mp4
