@@ -8,10 +8,10 @@ The aim of this project was to create a centralized web app, which would allow u
 
 ## Homepage 
 ### Calendar of every music shows happening in each music venues
-### Features: 
 - Like button to save favorite events
 - Link to buy tickets 
 - Link to the music venue
+
 https://user-images.githubusercontent.com/112727028/210448057-128b3b48-cd40-4421-a3fc-211350d7e9a6.mp4
 
 
