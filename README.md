@@ -7,25 +7,24 @@
 The aim of this project was to create a centralized web app, which would allow users to skip the step of viewing events by manually searching through each individual venue's website. The web app would allow users to discover new artists/bands close to their area. My primary focus is to give visibility to local bands or bands that are not yet well-established.
 
 ## Homepage 
-### Calendar for each event happening in Montreal 
-- Like button to save favorite events
-- Link to buy tickets 
-- Link to the music venue official website
+### Calendar lists upcoming Montreal events
+-Like button to save favorite events
+-Link to buy tickets
+-Link to the music venue's official website
 
 https://user-images.githubusercontent.com/112727028/210448057-128b3b48-cd40-4421-a3fc-211350d7e9a6.mp4
 
 
 ## Explore 
-### Location of each music venue with Google map API 
-The user can explore the map and find the location of each music venues
+### Google Map API integration to locate Montreal music venues
+The user can explore the map and find a music venue's location
 
 https://user-images.githubusercontent.com/112727028/210448014-55241973-50b7-43e6-bff6-dd2ea9ce6feb.mp4
 
 
 ## Profile
-### Login with Auth0 
-Information of the user
-Saved favorite event
+### Login feature with Auth0
+Information about the user's favorited event
 
 https://user-images.githubusercontent.com/112727028/210447979-790a09a6-20c3-4b34-8935-6feac16e1e7c.mp4
 
