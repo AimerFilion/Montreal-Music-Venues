@@ -1,5 +1,6 @@
 # Montreal Music Venues
-⭐ My final project. A website where events, from various Montreal local venues, are gathered in one place. 
+⭐ My final project. A website where events, from various Montreal local venues, are gathered in one place.
+
 🌱 Technologies: JavaScript, React.js, Node.js, Express.js, Git/Github,REST APIs, HTML, CSS, jQuery, styled-components and MongoDB.
 
 ## About
