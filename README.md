@@ -16,7 +16,8 @@ https://user-images.githubusercontent.com/112727028/210448057-128b3b48-cd40-4421
 
 
 ## Explore 
-### Location of music venues in Montreal city using a Google map API. The user can explore the map and find the location of each music venues
+### Location of music venues in Montreal city using a Google map API 
+The user can explore the map and find the location of each music venues
 
 https://user-images.githubusercontent.com/112727028/210448014-55241973-50b7-43e6-bff6-dd2ea9ce6feb.mp4
 
